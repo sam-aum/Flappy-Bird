@@ -31,4 +31,11 @@ function love.keypressed(key)
     end
 end
 
+function love.draw()
+    push:start()
+
+    love.graphics.draw(background, 0, 0)
+    love.graphics.draw(ground, 0, VIRTUAL_HEIGHT - 16)
+    
+end
 
