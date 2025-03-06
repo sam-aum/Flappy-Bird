@@ -132,7 +132,7 @@ function love.update(dt)
         local y = math.max(-PIPE_HEIGHT + 10, 
             math.min(lastY + math.random(-20, 20), VIRTUAL_HEIGHT - 90 - PIPE_HEIGHT))
         lastY = y
-        
+         
         table.insert(pipePairs, PipePair(y))
         spawnTimer = 0
     end
