@@ -32,7 +32,8 @@ function Bird:update(dt)
 
     -- add a sudden burst of negative gravity if we hit space
     if love.keyboard.wasPressed('space') then
-        self.dy = -3
+        self.dy = -2.5
+        
     end
 
     -- apply current velocity to Y position
