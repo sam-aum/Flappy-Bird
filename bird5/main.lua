@@ -67,7 +67,8 @@ function love.load()
 
     -- app window title
     love.window.setTitle('Fifty Bird')
-
+    
+    math.randomseed(os.time())
     -- initialize our virtual resolution
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         vsync = true,

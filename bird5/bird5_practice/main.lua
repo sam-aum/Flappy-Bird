@@ -151,6 +151,5 @@ function love.draw()
     bird:render()
     
 
-
     push:finish()
 end
