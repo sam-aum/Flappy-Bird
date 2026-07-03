@@ -10,7 +10,7 @@
 
 Bird = Class{}
 
-local GRAVITY = 20
+local GRAVITY = 980
 
 function Bird:init()
     -- load bird image from disk and assign its width and height
@@ -31,7 +31,7 @@ function Bird:update(dt)
     self.dy = self.dy + GRAVITY * dt
 
     -- apply current velocity to Y position
-    self.y = self.y + self.dy
+    self.y = self.y + self.dy * dt
 end
 
 function Bird:render()
