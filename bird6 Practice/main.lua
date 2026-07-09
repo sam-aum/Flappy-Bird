@@ -116,12 +116,18 @@ function love.update(dt)
     bird:update(dt)
 
     -- for every pipe in the scene...
-    for k, pipe in pairs(pipes) do
-        pipe:update(dt)
+    for k, pair in pairs(pipePairs) do
+        pair:update(dt)
+    end
 
-        -- if pipe is no longer visible past left edge, remove it from scene
-        if pipe.x < -pipe.width then
-            table.remove(pipes, k)
+    -- remove any flagged pipes
+    -- we need this second loop, rather than deleting in the previous loop, because
+    -- modifying the table in-place without explicit keys will result in skipping the
+    -- next pipe, since all implicit keys (numerical indices) are automatically shifted
+    -- down after a table removal
+    for k, pair in pairs(pipePairs) do
+        if pair.remove then
+            table.remove(pipePairs, k)
         end
     end
 
