@@ -137,7 +137,7 @@ function love.draw()
 
 
     -- render all the pipes in our scene
-    for k, pipe in pairs(pipes) do
+    for k, pipe in pairs(pipePairs) do
         pipe:render()
     end
 
