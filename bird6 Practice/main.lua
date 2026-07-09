@@ -7,6 +7,9 @@ require 'Bird'
 
 require 'Pipe'
 
+-- class representing pair of pipes together
+require 'PipePair'
+
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
@@ -26,11 +29,17 @@ local GROUND_SCROLL_SPEED = 60
 -- point at which we should loop our background back to X 0
 local BACKGROUND_LOOPING_POINT = 413
 
--- our table of spawning Pipes
-local pipes = {}
+
+-- our table of spawning PipePairs
+local pipePairs = {}
 
 -- our timer for spawning pipes
 local spawnTimer = 0
+
+
+-- initialize our last recorded Y value for a gap placement to base other gaps off of
+local lastY = -PIPE_HEIGHT + math.random(80) + 20
+
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -92,7 +101,14 @@ function love.update(dt)
 
     -- spawn a new Pipe if the timer is past 2 seconds
     if spawnTimer > 3 then
-        table.insert(pipes, Pipe())
+        -- modify the last Y coordinate we placed so pipe gaps aren't too far apart
+        -- no higher than 10 pixels below the top edge of the screen,
+        -- and no lower than a gap length (90 pixels) from the bottom
+        local y = math.max(-PIPE_HEIGHT + 10,
+            math.min(lastY + math.random(-20, 20), VIRTUAL_HEIGHT - 90 - PIPE_HEIGHT))
+        lastY = y
+
+        table.insert(pipePairs, PipePair(y))
         spawnTimer = 0
     end
 
